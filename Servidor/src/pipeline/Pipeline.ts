@@ -41,7 +41,7 @@ export class Pipeline<T> extends EventEmitter {
                     this.enqueueNextFilter(index, filteredData);
                 } catch (err) {
                     // En caso de error en el filtro, emite un evento 'errorInFilter' con el error y los datos.
-                    this.emit('errorInFilter', err, data);
+                    this.emit('errorInFilter', {error: err, data: data});
                 }
             });
         });

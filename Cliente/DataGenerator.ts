@@ -31,16 +31,18 @@ const customDataList: CustomData[] = [
     new CustomData('Juan', 'Lopez', '01234567', '091456789', 'Rocha', false), // Arranca con 0
     new CustomData('Juan', 'Edelman', '123456780', '091456789', 'Rocha', false), // 9 caracteres en la cedula
     new CustomData('Juan', 'Edelman', '123456', '091456789', 'Rocha', false), // 6 caracteres en la cedula
-    new CustomData('Juan', 'Edelman', '12345678', '091456789', 'Rocha', false), // 8 caracteres en la cedula
+    new CustomData('Juan', 'Edelman', '12345678', '091456789', 'Rocha', true), // 8 caracteres en la cedula
     new CustomData('Juan', 'Edelman', '1234567', '091456789', 'Rocha', false), // 7 caracteres en la cedula
-    // Agrega más objetos CustomData aquí si es necesario
+    new CustomData('Juan', '', '1234567', '091456789', 'Rocha', false),
+    new CustomData('Juan', 'Edelman', '1234567', '091456789', 'Peñarol', false),
+    new CustomData('Juan', 'Edelman', '1234567', '', 'Rocha', false)
 ];
 
 // Función para enviar un objeto CustomData al servidor
 const sendCustomDataToApi = async (customData: CustomData) => {
     try {
         // Envía el objeto CustomData al servidor
-        const res = await axios.post(apiUrl, customData);
+        await axios.post(apiUrl, customData);
         console.log('Datos enviados correctamente:');
     } catch (error) {
         console.error('Error al enviar datos:');

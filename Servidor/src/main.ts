@@ -14,15 +14,23 @@ const app = express();
 app.use(express.json()); // Middleware para parsear JSON
 const port = 3000;
 
-app.listen(port, () => {
-    console.log("App is running");
-});
+
 
 // construye una funcion de creacion de colas dependiendo de un parm se crea una funcion u otra (bull o rabbit)
 const queueFactory = QueueFactory.getQueueFactory<CustomData>; //ojo que no la invoca aca si no dentro de la Pipeline
 
 // Crear una nueva instancia de Pipeline usando Bull como backend de la cola
 const pipeline = new Pipeline<CustomData>([filter1, filter2, filter3, filter4], queueFactory);
+
+pipeline.on('finalOutput', (data: CustomData) => {
+    console.log(`Ha finalizado de agendarse ${data.nombre} ${data.apellido}`);
+});
+
+//se crea el listener para cuando un job da error
+pipeline.on('errorInFilter', ({ error, data}: {error: Error, data: CustomData}) => {
+    console.log(`No se pudo agendar a: ${data.nombre} ${data.apellido}`);
+});
+
 
 function validateCustomData(customData: CustomData): boolean {
     for (const key of Object.keys(customData)) {
@@ -38,38 +46,15 @@ function validateCustomData(customData: CustomData): boolean {
 app.post("/", (req : any, res : any) => {
     const customData: CustomData = req.body;
 
-    if(validateCustomData(customData) === false){
-        return res.status(400).send("Algún campo está vacío");
+    if(!validateCustomData(customData)){
+        res.status(400).send("Algún campo está vacío");
+    } else {
+        res.status(200).send("Se ha iniciado el proceso de agenda para la persona: " + customData.nombre + " " + customData.apellido);
+        console.log(customData);
+        pipeline.processInput(customData);
     }
-    res.status(200).send("Se ha iniciado el proceso de agenda para la persona: " + customData.nombre + " " + customData.apellido);
-    console.log(customData);
-    pipeline.processInput(customData);
 });
 
-//se crea el listener para cuando un job termina
-pipeline.on('finalOutput', (output) => {
-    console.log(`Salida final: ${output.data}`);
-    saveResult(output.data);
+app.listen(port, () => {
+    console.log("App is running");
 });
-
-//se crea el listener para cuando un job da error
-pipeline.on('errorInFilter', (error, data) => {
-    console.error(`Error en el filtro: ${error}, Datos: ${data.data}`);
-    saveResult(data.data);
-});
-
-const saveResult = (result: string) => {
-    const fileName = 'result.txt';
-    fs.appendFile(fileName, result + '\n', (err: any) => {
-        if (err) {
-            console.error('Error al guardar el resultado:', err);
-        } else {
-            console.log('Resultado guardado en', fileName);
-        }
-    });
-};
-
-const main = () => {
-};
-
-main();

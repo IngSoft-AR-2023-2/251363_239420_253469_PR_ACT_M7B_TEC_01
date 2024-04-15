@@ -10,6 +10,6 @@
     "noImplicitAny": true,         // Genera un error en expresiones y declaraciones con un tipo 'any' implícito
     "strictNullChecks": true       // Activa las comprobaciones estrictas de nulidad
   },
-  "include": ["src/**/*", "main.ts"],         // Incluye todos los archivos TypeScript del directorio 'src' y subdirectorios
+  "include": ["src/**/*", "src/main.ts"],         // Incluye todos los archivos TypeScript del directorio 'src' y subdirectorios
   "exclude": ["node_modules"]  
 }

@@ -3,6 +3,7 @@ import { QueueFactory } from './src/pipeline/QueueFactory';
 import { Pipeline } from './src/pipeline/Pipeline';
 //import { toLowercaseWithSpaces, toUppercase, replaceSpacesWithDots, filterWithRandomError } from './filters/filters';
 import { CustomData } from './src/data-structure/CustomData';
+import { filter1, filter2, filter3, filter4 } from './src/filters/filters';
 //import {generateRandomWord, generateTests} from './Generator';
 //const faker = require('faker'); // o import faker from 'faker';
 const fs = require('fs');
@@ -21,7 +22,7 @@ app.listen(port, () => {
 const queueFactory = QueueFactory.getQueueFactory<CustomData>; //ojo que no la invoca aca si no dentro de la Pipeline
 
 // Crear una nueva instancia de Pipeline usando Bull como backend de la cola
-const pipeline = new Pipeline<CustomData>([/* Aca poner los filtros */], queueFactory);
+const pipeline = new Pipeline<CustomData>([filter1, filter2, filter3, filter4], queueFactory);
 
 function validateCustomData(customData: CustomData): boolean {
     for (const key of Object.keys(customData)) {

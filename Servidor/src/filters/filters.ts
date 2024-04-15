@@ -1,5 +1,15 @@
 import { CustomData } from "../data-structure/CustomData"
 
+export const filter4 = (input: CustomData): CustomData => {
+    if(input.necesita_asistencia_movilidad){
+        console.log(`La persona ${input.nombre} ${input.apellido} necesita asistencia en movilidad`);
+    }
+    else {
+        console.log(`La persona ${input.nombre} ${input.apellido} sera agendada en el proceso común`);
+    }
+    return input;
+}
+
 export const filter3 = (input: CustomData): CustomData => {
     const dep = [
         "Artigas",

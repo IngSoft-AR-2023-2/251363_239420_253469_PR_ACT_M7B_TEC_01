@@ -7,3 +7,13 @@ export const filterTwo = (input: CustomData): CustomData => {
     }
     return {nombre : input.nombre, apellido : input.apellido, cedula : input.cedula, telefono : input.telefono, departamento : input.departamento, necesita_asistencia_movilidad : input.necesita_asistencia_movilidad}
 }
+export const filter1 = (input: CustomData): CustomData => {
+    let phone: string = input.telefono;
+    phone = phone.replace(/\s/g, ''); //Remueve espacios
+    if(phone.length === 9 && phone.startsWith('09')){
+        return input;
+    }
+    else{
+        throw new Error("El telefono no es valido");
+    }
+}

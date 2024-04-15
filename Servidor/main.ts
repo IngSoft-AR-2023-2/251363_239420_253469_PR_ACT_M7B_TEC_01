@@ -1,8 +1,8 @@
 
-import { QueueFactory } from './pipeline/QueueFactory';
-import { Pipeline } from './pipeline/Pipeline';
+import { QueueFactory } from './src/pipeline/QueueFactory';
+import { Pipeline } from './src/pipeline/Pipeline';
 //import { toLowercaseWithSpaces, toUppercase, replaceSpacesWithDots, filterWithRandomError } from './filters/filters';
-import { CustomData } from './data-structure/CustomData';
+import { CustomData } from './src/data-structure/CustomData';
 //import {generateRandomWord, generateTests} from './Generator';
 //const faker = require('faker'); // o import faker from 'faker';
 const fs = require('fs');
@@ -68,3 +68,7 @@ const saveResult = (result: string) => {
     });
 };
 
+const main = () => {
+};
+
+main();

@@ -25,6 +25,14 @@ const apiUrl = 'http://localhost:3000';
 // Lista de objetos CustomData harcodeados
 const customDataList: CustomData[] = [
     new CustomData('Juan', 'Perez', '123456789', '12345678', 'Montevideo', true),
+    new CustomData('Maria', 'Gonzalez', '987654321', '87654321', 'Canelones', false), //No empieza con 09
+    new CustomData('Pedro', 'Rodriguez', '01234567', '6543210', 'Maldonado', true), //El largo es menor a 9
+    new CustomData('Ana', 'Lopez', '012345678', '091456789', 'Rocha', false), //Debe pasar
+    new CustomData('Juan', 'Lopez', '01234567', '091456789', 'Rocha', false), // Arranca con 0
+    new CustomData('Juan', 'Edelman', '123456780', '091456789', 'Rocha', false), // 9 caracteres en la cedula
+    new CustomData('Juan', 'Edelman', '123456', '091456789', 'Rocha', false), // 6 caracteres en la cedula
+    new CustomData('Juan', 'Edelman', '12345678', '091456789', 'Rocha', false), // 8 caracteres en la cedula
+    new CustomData('Juan', 'Edelman', '1234567', '091456789', 'Rocha', false), // 7 caracteres en la cedula
     // Agrega más objetos CustomData aquí si es necesario
 ];
 

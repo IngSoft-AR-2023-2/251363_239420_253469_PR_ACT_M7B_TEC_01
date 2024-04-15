@@ -1,9 +1,9 @@
 
-import { QueueFactory } from './src/pipeline/QueueFactory';
-import { Pipeline } from './src/pipeline/Pipeline';
+import { QueueFactory } from './pipeline/QueueFactory';
+import { Pipeline } from './pipeline/Pipeline';
 //import { toLowercaseWithSpaces, toUppercase, replaceSpacesWithDots, filterWithRandomError } from './filters/filters';
-import { CustomData } from './src/data-structure/CustomData';
-import { filter1, filter2, filter3, filter4 } from './src/filters/filters';
+import { CustomData } from './data-structure/CustomData';
+import { filter1, filter2, filter3, filter4 } from './filters/filters';
 //import {generateRandomWord, generateTests} from './Generator';
 //const faker = require('faker'); // o import faker from 'faker';
 const fs = require('fs');
